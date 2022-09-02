@@ -7,15 +7,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class FirstViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configUI()
 	}
-
+	
+	// MARK: Configs
 	func configUI() {
 		view.backgroundColor = .clear
 	}
+	
+	// MARK: Selectors
 }
 
