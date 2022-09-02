@@ -25,6 +25,8 @@ final class FirstViewController: UIViewController {
 	// MARK: Configs
 	func configUI() {
 		configMainLabelView()
+		configTableView()
+		configNavBarUI(withTitle: "One Weather", prefersLargerTitle: true, isHidden: false)
 	}
 	
 	func configMainLabelView() {
@@ -35,9 +37,13 @@ final class FirstViewController: UIViewController {
 	
 	func configTableView() {
 		let tv = UITableView(frame: .zero)
-		tv.setAnchorTRBL(top: mainLabel.bottomAnchor, paddingTop: 15)
+		view.addSubview(tv)
+		tv.setAnchorTRBL(top: mainLabel.bottomAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, paddingTop: 50, paddingBottom: -10)
+		tv.register(FirstTableViewCell.self, forCellReuseIdentifier: "TABLE_CELL")
+		tv.isScrollEnabled = true
 		tv.dataSource = self
 		tv.delegate = self
+		tv.rowHeight = CGFloat(75)
 	}
 	
 	// MARK: Selectors
@@ -47,15 +53,18 @@ final class FirstViewController: UIViewController {
 
 extension FirstViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
+		return 20
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as UITableViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as! FirstTableViewCell
 		return cell
 	}
 	
-	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let vc = SeconcdViewController()
+		navigationController?.pushViewController(vc, animated: true)
+	}
 }
 
 extension FirstViewController: UITableViewDelegate {
