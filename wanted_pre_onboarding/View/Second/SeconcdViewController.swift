@@ -7,12 +7,21 @@
 
 import UIKit
 
-class SeconcdViewController: UIViewController {
+final class SeconcdViewController: UIViewController {
+	
+	private let weatherDetailView = WeatherDetailView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		configNavBarUI(withTitle: "", prefersLargerTitle: false, isHidden: false)
-		view.backgroundColor = .systemBlue
+		configNavBarUI(withTitle: "Seoul", prefersLargerTitle: true, isHidden: false)
+		view.backgroundColor = .white
+		configUI()
     }
+	
+	func configUI() {
+		view.addSubview(weatherDetailView)
+		weatherDetailView.setAnchor(anchorTo: [.top(padding: 15, isToSafeArea: true)], inView: view)
+		weatherDetailView.setCenterX(inView: view)
+	}
     
 }
