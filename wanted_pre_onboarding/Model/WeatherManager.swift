@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Weather {
+final class WeatherNetwork {
 	static let shared = Weather()
 	typealias NetworkCompletion = (Result<Any, NetworkError>) -> Void
 	
