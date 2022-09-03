@@ -8,7 +8,7 @@
 import UIKit
 
 final class FirstTableViewCell: UITableViewCell {
-	private let weatherImage: UIImageView = {
+	private let weatherIcon: UIImageView = {
 		let iv = UIImageView()
 		iv.contentMode = .scaleToFill
 		iv.clipsToBounds = true
@@ -53,14 +53,14 @@ final class FirstTableViewCell: UITableViewCell {
 	}
 	
 	func configUI() {
-		configWeatherImage()
+		configWeatherIconView()
 		configStackViews()
 	}
 	
-	func configWeatherImage() {
-		addSubview(weatherImage)
-		weatherImage.setCenterY(inView: self)
-		weatherImage.setAnchor(anchorTo: [.leading(padding: 30, isToSafeArea: true)], inView: self)
+	func configWeatherIconView() {
+		addSubview(weatherIcon)
+		weatherIcon.setCenterY(inView: self)
+		weatherIcon.setAnchor(anchorTo: [.leading(padding: 30, isToSafeArea: true)], inView: self)
 	}
 	
 	func configStackViews() {

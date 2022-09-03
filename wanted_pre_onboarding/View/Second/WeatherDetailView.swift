@@ -23,7 +23,7 @@ final class WeatherDetailView: UIView {
 		return la
 	}()
 	
-	private let bodyFillTemp: UILabel = {
+	private let bodyFeelTemp: UILabel = {
 		let la = UILabel()
 		return la
 	}()
@@ -59,15 +59,11 @@ final class WeatherDetailView: UIView {
 	}
 	
 	func configUI() {
-		configWeatherIcon()
+		configWeatherIconView()
 	}
 	
-	func configWeatherIcon() {
+	func configWeatherIconView() {
 		addSubview(weatherIcon)
 		weatherIcon.setCenterX(inView: self)
-	}
-	
-	func configStackView() {
-//		let stack = UIStackView(arrangedSubviews: [])
 	}
 }
