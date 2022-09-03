@@ -8,10 +8,16 @@
 import Foundation
 import UIKit
 
-struct WeatherIconViewModel {
+struct WeatherViewModel {
 	var weatherIcon: UIImage?
 	
-	init() {
-		
-	}
+	var cityName: UILabel
+	var temperature: UILabel
+	var humidity: UILabel
+	var curruntTemp: UILabel
+	var bodyFeelTemp: UILabel
+	var minTemp: UILabel
+	var maxTemp: UILabel
+	var atmosPress: UILabel
+	var windSpeed: UILabel
 }
