@@ -15,24 +15,24 @@ final class FirstTableViewCell: UITableViewCell {
 	
 	private let cityName: UILabel = {
 		let la = UILabel()
-		la.text = "!!"
-		la.font = .systemFont(ofSize: 32)
+		la.text = "도시이름"
+		la.font = .systemFont(ofSize: 16)
 		return la
 	}()
 	
 	private let curruntTemp: UILabel = {
 		let la = UILabel()
 		la.textColor = .systemPurple
-		la.text = "!!"
-		la.font = .systemFont(ofSize: 32)
+		la.text = "현재온도"
+		la.font = .systemFont(ofSize: 16)
 		return la
 	}()
 	
 	private let humidity: UILabel = {
 		let la = UILabel()
 		la.textColor = .systemBlue
-		la.text = "!!!"
-		la.font = .systemFont(ofSize: 32)
+		la.text = "습도"
+		la.font = .systemFont(ofSize: 16)
 		return la
 	}()
 	

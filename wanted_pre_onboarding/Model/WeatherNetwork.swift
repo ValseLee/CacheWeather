@@ -8,11 +8,15 @@
 import Foundation
 
 final class WeatherNetwork {
-//	static let shared = WeatherNetwork()
 	typealias NetworkCompletion = (Result<Any, NetworkError>) -> Void
+	static let shared = WeatherNetwork()
 	
-	func startNetwork(_ cities: [String], completion: @escaping NetworkCompletion) {
-		let urlString = "https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=7f55bd940bdfc44417b670cd85cbccac&lang=kr"
+	private let cityList = CityList()
+
+	func fetchWeatherData(completion: @escaping NetworkCompletion) {
+		let cityIdList = cityList.getCityId()
+		let appid = "7f55bd940bdfc44417b670cd85cbccac"
+		let urlString = "https://api.openweathermap.org/data/2.5/group?id=\(cityIdList)&units=metric&appid=\(appid)&lang=kr"
 		
 		performRequest(with: urlString) { result in
 			completion(result)
@@ -38,10 +42,30 @@ final class WeatherNetwork {
 				return
 			}
 			
-			
+			if let weathers = self.parseJSON(safeData) {
+				completion(.success(weathers))
+			}
+			else {
+				completion(.failure(.parseError))
+			}
 		}
 		task.resume()
 	}
+	
+	private func parseJSON(_ resultData: Data) -> [WeatherInfoList]? {
+		do {
+			let decoder = JSONDecoder()
+			let weather = try decoder.decode(WeatherInfo.self, from: resultData)
+			let weatherInfoList = weather.list
+			return weatherInfoList
+		}
+		catch {
+			dump(error)
+			return nil
+		}
+	}
+	
+	private init() {}
 }
 
 // MARK: Error Enum

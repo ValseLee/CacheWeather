@@ -10,6 +10,11 @@ import UIKit
 
 // MARK: UIView
 extension UIView {
+	/*
+	 Layout Extensions
+	 Anchoring
+	 Centering
+	*/
 	enum AnchorTo {
 		case top(padding: CGFloat, isToSafeArea: Bool)
 		case bottom(padding: CGFloat, isToSafeArea: Bool)

@@ -13,27 +13,27 @@ final class WeatherDetailView: UIView {
 		return iv
 	}()
 	
-	private let curruntTemp: UILabel = {
+	private let temp: UILabel = {
 		let la = UILabel()
 		return la
 	}()
 	
-	private let bodyFeelTemp: UILabel = {
+	private let feelsLike: UILabel = {
 		let la = UILabel()
 		return la
 	}()
 	
-	private let minTemp: UILabel = {
+	private let tempMin: UILabel = {
 		let la = UILabel()
 		return la
 	}()
 	
-	private let maxTemp: UILabel = {
+	private let tempMax: UILabel = {
 		let la = UILabel()
 		return la
 	}()
 	
-	private let atmosPress: UILabel = {
+	private let pressure: UILabel = {
 		let la = UILabel()
 		return la
 	}()
@@ -61,5 +61,9 @@ final class WeatherDetailView: UIView {
 		addSubview(weatherIcon)
 		weatherIcon.setCenterX(inView: self)
 		weatherIcon.setAnchor(anchorTo: [.top(padding: 30, isToSafeArea: true)], inView: self)
+	}
+	
+	func setupView() {
+		
 	}
 }
