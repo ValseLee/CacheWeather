@@ -8,13 +8,8 @@
 import UIKit
 
 final class WeatherDetailView: UIView {
-	private let weatherIcon: UIImageView = {
-		let iv = UIImageView()
-		iv.setSize(height: 56, width: 56)
-		iv.layer.cornerRadius = 56 / 2
-		iv.contentMode = .scaleToFill
-		iv.clipsToBounds = true
-		iv.image = UIImage(systemName: "heart")!
+	private let weatherIcon: WeatherIconView = {
+		let iv = WeatherIconView(weatherIcon: UIImage(systemName: "heart"), size: 75)
 		return iv
 	}()
 	
@@ -65,5 +60,6 @@ final class WeatherDetailView: UIView {
 	func configWeatherIconView() {
 		addSubview(weatherIcon)
 		weatherIcon.setCenterX(inView: self)
+		weatherIcon.setAnchor(anchorTo: [.top(padding: 30, isToSafeArea: true)], inView: self)
 	}
 }

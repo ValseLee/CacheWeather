@@ -8,13 +8,8 @@
 import UIKit
 
 final class FirstTableViewCell: UITableViewCell {
-	private let weatherIcon: UIImageView = {
-		let iv = UIImageView()
-		iv.contentMode = .scaleToFill
-		iv.clipsToBounds = true
-		iv.setSize(height: 36, width: 36)
-		iv.layer.cornerRadius = 36 / 2
-		iv.image = UIImage(systemName: "heart")
+	private var weatherIcon: WeatherIconView = {
+		let iv = WeatherIconView(weatherIcon: UIImage(systemName: "heart"), size: 45)
 		return iv
 	}()
 	
@@ -25,7 +20,7 @@ final class FirstTableViewCell: UITableViewCell {
 		return la
 	}()
 	
-	private let temperature: UILabel = {
+	private let curruntTemp: UILabel = {
 		let la = UILabel()
 		la.textColor = .systemPurple
 		la.text = "!!"
@@ -60,15 +55,15 @@ final class FirstTableViewCell: UITableViewCell {
 	func configWeatherIconView() {
 		addSubview(weatherIcon)
 		weatherIcon.setCenterY(inView: self)
-		weatherIcon.setAnchor(anchorTo: [.leading(padding: 30, isToSafeArea: true)], inView: self)
+		weatherIcon.setAnchor(anchorTo: [.leading(padding: 50, isToSafeArea: true)], inView: self)
 	}
 	
 	func configStackViews() {
-		let stack = UIStackView(arrangedSubviews: [cityName, temperature, humidity])
+		let stack = UIStackView(arrangedSubviews: [cityName, curruntTemp, humidity])
 		stack.axis = .horizontal
 		stack.alignment = .center
 		stack.distribution = .fillEqually
-		stack.spacing = 15
+		stack.spacing = 30
 		addSubview(stack)
 		
 		stack.setAnchor(anchorTo: [.trailing(padding: 30, isToSafeArea: true)], inView: self)
