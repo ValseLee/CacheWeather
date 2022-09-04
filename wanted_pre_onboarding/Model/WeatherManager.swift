@@ -8,7 +8,7 @@
 import Foundation
 
 final class WeatherNetwork {
-	static let shared = Weather()
+//	static let shared = WeatherNetwork()
 	typealias NetworkCompletion = (Result<Any, NetworkError>) -> Void
 	
 	func startNetwork(_ cities: [String], completion: @escaping NetworkCompletion) {

@@ -6,7 +6,19 @@
 //
 
 import Foundation
+import UIKit
 
 struct Weather {
+	let weatherIcon: UIImage?
+	let cityName: String
+	let curruntTemp: String
+	let bodyFeelTemp: String
+	let minTemp: String
+	let maxTemp: String
+	let atmosPress: String
+	let windSpeed: String
 	
+//	init(dictionary: [String: Any]) {
+//		self.weatherIcon = dictionary
+//	}
 }
