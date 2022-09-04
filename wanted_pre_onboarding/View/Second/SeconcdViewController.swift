@@ -8,7 +8,6 @@
 import UIKit
 
 final class SeconcdViewController: UIViewController {
-	
 	private let weatherDetailView = WeatherDetailView()
 
     override func viewDidLoad() {
@@ -22,6 +21,10 @@ final class SeconcdViewController: UIViewController {
 		view.addSubview(weatherDetailView)
 		weatherDetailView.setAnchor(anchorTo: [.top(padding: 15, isToSafeArea: true)], inView: view)
 		weatherDetailView.setCenterX(inView: view)
+	}
+	
+	func setupView() {
+		weatherDetailView.setupView()
 	}
     
 }
