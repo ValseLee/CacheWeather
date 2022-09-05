@@ -28,7 +28,7 @@ final class FirstViewController: UIViewController {
 	init(setViewModel: WeatherDetailViewModel) {
 		super.init(nibName: nil, bundle: nil)
 		self.viewModel = setViewModel
-		self.viewModel?.firstViewControllerdelegate = self
+		self.viewModel?.firstViewControllerDelegate = self
 	}
 	
 	required init?(coder: NSCoder) {
@@ -77,23 +77,20 @@ extension FirstViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as! FirstTableViewCell
-		let weatherArray = viewModel!.weatherInfoList[indexPath.row]
-//
-//		let image = weatherArray.weather[0].icon
-//		let imageUrl = "https://openweathermap.org/img/wn/\(image)@2x.png"
-//		let imageData = try? Data(contentsOf: URL(string: "\(imageUrl)")!)
-//
-//		cell.weatherIcon.image = UIImage(data: imageData!)!
-		cell.temp.text = String(weatherArray.main.temp)
-		cell.humidity.text = String(weatherArray.main.humidity)
-		cell.cityName.text = String(weatherArray.name)
+		let weatherInfoArray = viewModel!.weatherInfoList[indexPath.row]
+		let weatherIcon = viewModel!.weatherIconList[indexPath.row]
+
+		cell.weatherIcon.image = weatherIcon
+		cell.temp.text = String(weatherInfoArray.main.temp) + "'C"
+		cell.humidity.text = "습도: " + String(weatherInfoArray.main.humidity)
+		cell.cityName.text = String(weatherInfoArray.name)
 		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let arr = viewModel?.weatherInfoList[indexPath.row]
-		let vc = SeconcdViewController(cityName: arr!.name)
+		let weatherInfoArray = viewModel?.weatherInfoList[indexPath.row]
+		let vc = SeconcdViewController(cityName: weatherInfoArray!.name, viewModel: viewModel!, weatherInfoArray: weatherInfoArray!)
 		navigationController?.pushViewController(vc, animated: true)
 	}
 }
