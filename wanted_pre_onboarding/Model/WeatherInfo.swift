@@ -69,6 +69,7 @@ struct WeatherElement: Codable {
 enum MainEnum: String, Codable {
 	case clouds = "Clouds"
 	case rain = "Rain"
+	case mist = "Mist"
 }
 
 // MARK: - Wind

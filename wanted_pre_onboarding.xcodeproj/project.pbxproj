@@ -19,8 +19,8 @@
 		7035055628C2160400CB6478 /* SeconcdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035055528C2160400CB6478 /* SeconcdViewController.swift */; };
 		7035055828C216E400CB6478 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035055728C216E400CB6478 /* Extensions.swift */; };
 		7035055D28C2194D00CB6478 /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035055C28C2194D00CB6478 /* FirstTableViewCell.swift */; };
+		7037804E28C59B3D002D468F /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7083723428C38E3300AFECDB /* WeatherInfo.swift */; };
 		707A5BA228C230AA00100438 /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A5BA128C230AA00100438 /* WeatherDetailView.swift */; };
-		7083723528C38E3300AFECDB /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7083723428C38E3300AFECDB /* WeatherInfo.swift */; };
 		70C8AA9728C4553B00B1A2D6 /* WeatherIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C8AA9628C4553B00B1A2D6 /* WeatherIconView.swift */; };
 		70C8AA9928C458C200B1A2D6 /* WeatherDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C8AA9828C458C200B1A2D6 /* WeatherDetailInfo.swift */; };
 /* End PBXBuildFile section */
@@ -220,11 +220,11 @@
 				7027B2AB28C1A4B000CE78AB /* FirstViewController.swift in Sources */,
 				7035055828C216E400CB6478 /* Extensions.swift in Sources */,
 				707A5BA228C230AA00100438 /* WeatherDetailView.swift in Sources */,
-				7083723528C38E3300AFECDB /* WeatherInfo.swift in Sources */,
 				70C8AA9728C4553B00B1A2D6 /* WeatherIconView.swift in Sources */,
 				7027B2A728C1A4B000CE78AB /* AppDelegate.swift in Sources */,
 				7035055628C2160400CB6478 /* SeconcdViewController.swift in Sources */,
 				7035055428C1ABF400CB6478 /* WeatherNetwork.swift in Sources */,
+				7037804E28C59B3D002D468F /* WeatherInfo.swift in Sources */,
 				7027B2A928C1A4B000CE78AB /* SceneDelegate.swift in Sources */,
 				700DDC0A28C4621000131948 /* CityLIst.swift in Sources */,
 				7035055D28C2194D00CB6478 /* FirstTableViewCell.swift in Sources */,
