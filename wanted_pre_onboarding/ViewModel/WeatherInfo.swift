@@ -10,7 +10,6 @@ import Foundation
 
 // MARK: - Weather
 struct WeatherInfo: Codable {
-	let cnt: Int
 	let list: [WeatherInfoList]
 }
 
