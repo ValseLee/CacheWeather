@@ -8,38 +8,26 @@
 import UIKit
 
 final class FirstTableViewCell: UITableViewCell {
-	private var weatherIcon: WeatherIconView = {
-		let iv = WeatherIconView(weatherIcon: UIImage(systemName: "heart"), size: 45)
-		return iv
+
+	public var weatherIcon: UIImageView = {
+		return WeatherIconView(size: 45)
 	}()
 	
-	private let cityName: UILabel = {
-		let la = UILabel()
-		la.text = "도시이름"
-		la.font = .systemFont(ofSize: 16)
-		return la
+	public var cityName: UILabel = {
+		return CustomWeatherInfoLabel(category: .cityName)
 	}()
 	
-	private let curruntTemp: UILabel = {
-		let la = UILabel()
-		la.textColor = .systemPurple
-		la.text = "현재온도"
-		la.font = .systemFont(ofSize: 16)
-		return la
+	public var temp: UILabel = {
+		return CustomWeatherInfoLabel(category: .temp)
 	}()
 	
-	private let humidity: UILabel = {
-		let la = UILabel()
-		la.textColor = .systemBlue
-		la.text = "습도"
-		la.font = .systemFont(ofSize: 16)
-		return la
+	public var humidity: UILabel = {
+		return CustomWeatherInfoLabel(category: .humidity)
 	}()
 	
-	// MARK: Lifecycle	
+	// MARK: Lifecycle
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		self.backgroundColor = .white
 		configUI()
 	}
 	
@@ -55,18 +43,22 @@ final class FirstTableViewCell: UITableViewCell {
 	func configWeatherIconView() {
 		addSubview(weatherIcon)
 		weatherIcon.setCenterY(inView: self)
-		weatherIcon.setAnchor(anchorTo: [.leading(padding: 50, isToSafeArea: true)], inView: self)
+		weatherIcon.setAnchor(anchorTo: [.leading(padding: 30, isToSafeArea: true)], inView: self)
 	}
 	
 	func configStackViews() {
-		let stack = UIStackView(arrangedSubviews: [cityName, curruntTemp, humidity])
+		let stack = UIStackView(arrangedSubviews: [cityName, temp, humidity])
 		stack.axis = .horizontal
 		stack.alignment = .center
-		stack.distribution = .fillEqually
-		stack.spacing = 30
+		stack.distribution = .equalSpacing
+		stack.spacing = 20
 		addSubview(stack)
 		
 		stack.setAnchor(anchorTo: [.trailing(padding: 30, isToSafeArea: true)], inView: self)
 		stack.setCenterY(inView: self)
+	}
+	
+	func updateViewCell() {
+		
 	}
 }
