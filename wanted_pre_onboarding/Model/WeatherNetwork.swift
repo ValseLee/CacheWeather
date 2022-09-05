@@ -11,7 +11,10 @@ final class WeatherNetwork {
 	typealias NetworkCompletion = (Result<Any, NetworkError>) -> Void
 	static let shared = WeatherNetwork()
 	
+	private let imageManager = ImageProvider.shared
 	private let cityList = CityList()
+	
+	var viewModelDelegate: WeatherDetailViewModel?
 
 	func fetchWeatherData(completion: @escaping NetworkCompletion) {
 		let cityIdList = cityList.getCityId()
@@ -42,7 +45,17 @@ final class WeatherNetwork {
 				return
 			}
 			
+			// cityname 도 함께 전달해야 key 세팅이 온전하게 된다.
+			// 내일 여기부터 작업
 			if let weathers = self.parseJSON(safeData) {
+				let iconArray = weathers.map { $0.weather[0].icon }
+				iconArray.forEach { str in
+					let url = "https://openweathermap.org/img/wn/\(str)@2x.png"
+					let cityName = weathers[0].name
+					self.imageManager.loadImage(imageURL: url, cityName: cityName) { image in
+						self.viewModelDelegate?.weatherIconList.append(image!)
+					}
+				}
 				completion(.success(weathers))
 			}
 			else {
@@ -56,8 +69,7 @@ final class WeatherNetwork {
 		do {
 			let decoder = JSONDecoder()
 			let weather = try decoder.decode(WeatherInfo.self, from: resultData)
-			let weatherInfoList = weather.list
-			return weatherInfoList
+			return weather.list
 		}
 		catch {
 			dump(error)
