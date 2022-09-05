@@ -9,10 +9,21 @@ import UIKit
 
 final class SeconcdViewController: UIViewController {
 	private let weatherDetailView = WeatherDetailView()
-
+	private var cityName: String?
+	
+	init(cityName: String) {
+		super.init(nibName: nil, bundle: nil)
+		self.cityName = cityName
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
     override func viewDidLoad() {
         super.viewDidLoad()
-		configNavBarUI(withTitle: "Seoul", prefersLargerTitle: true, isHidden: false)
+		guard let cityName = cityName else { return }
+		configNavBarUI(withTitle: "\(cityName)", prefersLargerTitle: true, isHidden: false)
 		view.backgroundColor = .white
 		configUI()
     }
@@ -22,9 +33,4 @@ final class SeconcdViewController: UIViewController {
 		weatherDetailView.setAnchor(anchorTo: [.top(padding: 15, isToSafeArea: true)], inView: view)
 		weatherDetailView.setCenterX(inView: view)
 	}
-	
-	func setupView() {
-		weatherDetailView.setupView()
-	}
-    
 }
