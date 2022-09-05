@@ -19,21 +19,19 @@ struct WeatherInfoList: Codable {
 	let weather: [WeatherElement]
 	let main: MainClass
 	let wind: Wind
-//	let clouds: Clouds
 	let dt: Int
 	let name: String
+//	let clouds: Clouds
 }
 
 //struct Clouds: Codable {
 //	let all: Int
 //}
 
-// MARK: - Coord
 struct Coord: Codable {
 	let lon, lat: Double
 }
 
-// MARK: - MainClass
 struct MainClass: Codable {
 	let temp, feelsLike, tempMin, tempMax: Double
 	let pressure: Int
@@ -53,7 +51,6 @@ enum Country: String, Codable {
 	case kr = "KR"
 }
 
-// MARK: - WeatherElement
 struct WeatherElement: Codable {
 	let main: MainEnum
 	let weatherDescription: String
@@ -72,7 +69,6 @@ enum MainEnum: String, Codable {
 	case mist = "Mist"
 }
 
-// MARK: - Wind
 struct Wind: Codable {
 	let speed: Double
 	let deg: Int

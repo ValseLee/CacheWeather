@@ -8,10 +8,8 @@
 import UIKit
 
 final class FirstViewController: UIViewController {
-	private let networkManager = WeatherNetwork.shared
 	private let weatherTableView = UITableView(frame: .zero)
-	private lazy var weatherDataList = [WeatherInfoList]()
-	private lazy var viewModel = WeatherDetailViewModel()
+	private var viewModel: WeatherDetailViewModel?
 	
 	private let mainLabel: UILabel = {
 		let la = UILabel()
@@ -27,9 +25,10 @@ final class FirstViewController: UIViewController {
 		configUI()
 	}
 	
-	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-		setupData()
+	init(setViewModel: WeatherDetailViewModel) {
+		super.init(nibName: nil, bundle: nil)
+		self.viewModel = setViewModel
+		self.viewModel?.firstViewControllerdelegate = self
 	}
 	
 	required init?(coder: NSCoder) {
@@ -60,43 +59,41 @@ final class FirstViewController: UIViewController {
 	}
 	
 	// MARK: Networks
-	func setupData() {
-		networkManager.fetchWeatherData { (result) in
-			switch result {
-				case .success(let result):
-					self.weatherDataList = result as! [WeatherInfoList]
-					DispatchQueue.main.async {
-						UIView.transition(with: self.weatherTableView,
-										  duration: 0.55,
-										  options: .transitionCrossDissolve) {
-							self.weatherTableView.reloadData()
-						}
-					}
-				case .failure(let error):
-					print(error)
+	func updateUI() {
+		DispatchQueue.main.async {
+			UIView.transition(with: self.weatherTableView,
+							  duration: 0.55,
+							  options: .transitionCrossDissolve) {
+				self.weatherTableView.reloadData()
 			}
 		}
 	}
-	
-	
-	// MARK: Selectors
-
 }
 
 extension FirstViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return weatherDataList.count
+		return (viewModel?.weatherInfoList.count)!
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as! FirstTableViewCell
+		let weatherArray = viewModel!.weatherInfoList[indexPath.row]
+//
+//		let image = weatherArray.weather[0].icon
+//		let imageUrl = "https://openweathermap.org/img/wn/\(image)@2x.png"
+//		let imageData = try? Data(contentsOf: URL(string: "\(imageUrl)")!)
+//
+//		cell.weatherIcon.image = UIImage(data: imageData!)!
+		cell.temp.text = String(weatherArray.main.temp)
+		cell.humidity.text = String(weatherArray.main.humidity)
+		cell.cityName.text = String(weatherArray.name)
+		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let vc = SeconcdViewController()
-		let arr = weatherDataList[indexPath.row]
-		dump(arr)
+		let arr = viewModel?.weatherInfoList[indexPath.row]
+		let vc = SeconcdViewController(cityName: arr!.name)
 		navigationController?.pushViewController(vc, animated: true)
 	}
 }

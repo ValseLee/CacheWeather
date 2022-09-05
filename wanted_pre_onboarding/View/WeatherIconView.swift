@@ -8,14 +8,13 @@
 import Foundation
 import UIKit
 
-final class WeatherIconView: UIView {
+final class WeatherIconView: UIImageView {
 	
-	init(weatherIcon: UIImage?, size: CGFloat) {
+	init(size: CGFloat) {
 		super.init(frame: .zero)
 		backgroundColor = .none
 		
 		let iv = UIImageView()
-		iv.image = weatherIcon
 		iv.tintColor = .systemBlue
 		
 		addSubview(iv)
