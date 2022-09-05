@@ -9,11 +9,16 @@ import UIKit
 
 final class SeconcdViewController: UIViewController {
 	private let weatherDetailView = WeatherDetailView()
+	private var viewModel: WeatherDetailViewModel?
+	private var weatherInfoArray: WeatherInfoList?
+	
 	private var cityName: String?
 	
-	init(cityName: String) {
+	init(cityName: String, viewModel: WeatherDetailViewModel, weatherInfoArray: WeatherInfoList) {
 		super.init(nibName: nil, bundle: nil)
 		self.cityName = cityName
+		self.viewModel = viewModel
+		self.weatherInfoArray = weatherInfoArray
 	}
 	
 	required init?(coder: NSCoder) {
@@ -28,9 +33,15 @@ final class SeconcdViewController: UIViewController {
 		configUI()
     }
 	
-	func configUI() {
+	private func configUI() {
 		view.addSubview(weatherDetailView)
 		weatherDetailView.setAnchor(anchorTo: [.top(padding: 15, isToSafeArea: true)], inView: view)
 		weatherDetailView.setCenterX(inView: view)
+	}
+	
+	private func loadImageFromCache() {
+		let icon = weatherInfoArray!.weather[0].icon
+		let imageUrl = "https://openweathermap.org/img/wn/\(icon)@2x.png"
+		// image load는 뷰모델에서하기. 캐싱하기
 	}
 }
