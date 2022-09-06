@@ -15,6 +15,7 @@ final class WeatherDetailViewModel {
 	weak var secondViewControllerDelegate: SeconcdViewController? = nil
 	
 	lazy var weatherInfoList = [WeatherInfoList]()
+	
 	lazy var weatherIconList = [UIImage]()
 	lazy var weatherIconCache = NSCache<NSString, UIImage>()
 	lazy var weatherIconCacheImage = UIImage()
@@ -26,15 +27,13 @@ final class WeatherDetailViewModel {
 	}
 	
 	public func fetchData() {
-		DispatchQueue.global(qos: .utility).async {
-			self.networkManager.fetchWeatherData { [weak self] (result) in
-				switch result {
-					case .success(let result):
-						self?.weatherInfoList = result as! [WeatherInfoList]
-						self?.firstViewControllerDelegate?.updateUI()
-					case .failure(let error):
-						dump(error)
-				}
+		self.networkManager.fetchWeatherData { [weak self] (result) in
+			switch result {
+				case .success(let result):
+					self?.weatherInfoList = result as! [WeatherInfoList]
+					self?.firstViewControllerDelegate?.updateUI()
+				case .failure(let error):
+					dump(error)
 			}
 		}
 	}

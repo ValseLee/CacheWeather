@@ -28,14 +28,14 @@ final class ImageProvider {
 	
 	// MARK: Image Init
 	public func loadImage(imageURL: String, cityName: String) {
-		if let _ = weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
+		if let _ = self.weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
 			return
 		}
 		
 		guard let safeUrl = URL(string: imageURL) else { return }
 		if let imageData = try? Data(contentsOf: URL(string: "\(safeUrl)")!) {
 			let image = UIImage(data: imageData)
-			weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
+			self.weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
 			return
 		}
 	}
