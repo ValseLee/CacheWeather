@@ -15,21 +15,24 @@ final class CustomWeatherInfoLabel: UILabel {
 		
 		switch category {
 			case .temp:
-				textColor = .darkGray
+				textColor = .black
 			case .feelsLike:
 				textColor = .orange
 			case .tempMin:
-				textColor = .blue
+				textColor = .systemBlue
 			case .tempMax:
-				textColor = .red
+				textColor = .systemRed
 			case .pressure:
-				textColor = .blue
+				textColor = .systemBlue
 			case .humidity:
 				textColor = .systemBlue
 			case .windSpeed:
 				textColor = .systemPurple
 			case .cityName:
 				textColor = .black
+			case .description:
+				textColor = .black
+				font = .boldSystemFont(ofSize: 28)
 		}
 	}
 	
@@ -46,5 +49,6 @@ final class CustomWeatherInfoLabel: UILabel {
 		case pressure
 		case humidity
 		case windSpeed
+		case description
 	}
 }

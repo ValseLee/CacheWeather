@@ -12,19 +12,13 @@ final class WeatherIconView: UIImageView {
 	
 	init(size: CGFloat) {
 		super.init(frame: .zero)
-		backgroundColor = .none
-		
-		let iv = UIImageView()
-		iv.tintColor = .systemBlue
-		
-		addSubview(iv)
-		iv.setCenterY(inView: self)
-		iv.setCenterX(inView: self)
-		
-		iv.setSize(height: size, width: size)
-		iv.layer.cornerRadius = size / 2
-		iv.contentMode = .scaleToFill
-		iv.clipsToBounds = true
+		backgroundColor = .systemPink.withAlphaComponent(0.2)
+		setCenterY(inView: self)
+		setCenterX(inView: self)
+		setSize(height: size, width: size)
+		contentMode = .scaleToFill
+		clipsToBounds = true
+		layer.cornerRadius = size / 2
 	}
 	
 	required init?(coder: NSCoder) {
