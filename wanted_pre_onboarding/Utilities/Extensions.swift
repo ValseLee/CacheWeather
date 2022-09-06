@@ -106,7 +106,7 @@ extension UIViewController {
 		appearance.configureWithOpaqueBackground()
 		appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
 		appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-		appearance.backgroundColor = .clear
+		appearance.backgroundColor = .white
 		
 		navigationController?.navigationBar.standardAppearance = appearance
 		navigationController?.navigationBar.compactAppearance = appearance

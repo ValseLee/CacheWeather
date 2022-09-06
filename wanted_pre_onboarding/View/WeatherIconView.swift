@@ -12,7 +12,7 @@ final class WeatherIconView: UIImageView {
 	
 	init(size: CGFloat) {
 		super.init(frame: .zero)
-		backgroundColor = .systemPink.withAlphaComponent(0.2)
+		backgroundColor = .systemBlue.withAlphaComponent(0.2)
 		setCenterY(inView: self)
 		setCenterX(inView: self)
 		setSize(height: size, width: size)
