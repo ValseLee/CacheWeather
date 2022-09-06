@@ -45,7 +45,7 @@ final class WeatherNetwork {
 			}
 			
 			if let weathers = self.parseJSON(safeData) {
-				DispatchQueue.global(qos: .utility).async {
+				DispatchQueue.global(qos: .background).async {
 					weathers.forEach { list in
 						let cityWeatherIcon = list.weather[0].icon
 						let cityName = list.name
