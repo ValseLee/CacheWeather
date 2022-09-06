@@ -19,6 +19,7 @@ final class SeconcdViewController: UIViewController {
 		self.cityName = cityName
 		self.viewModel = viewModel
 		self.weatherInfoArray = weatherInfoArray
+		self.loadImageFromCache()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -42,6 +43,6 @@ final class SeconcdViewController: UIViewController {
 	private func loadImageFromCache() {
 		let icon = weatherInfoArray!.weather[0].icon
 		let imageUrl = "https://openweathermap.org/img/wn/\(icon)@2x.png"
-		// image load는 뷰모델에서하기. 캐싱하기
+		let cacheImage = viewModel?.loadCacheImage(url: imageUrl, cityName: cityName!)
 	}
 }
