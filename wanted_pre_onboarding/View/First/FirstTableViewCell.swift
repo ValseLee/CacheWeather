@@ -10,7 +10,7 @@ import UIKit
 final class FirstTableViewCell: UITableViewCell {
 
 	public var weatherIcon: UIImageView = {
-		return WeatherIconView(size: 32)
+		return WeatherIconView(size: 50)
 	}()
 	
 	public var cityName: UILabel = {
@@ -43,22 +43,13 @@ final class FirstTableViewCell: UITableViewCell {
 	func configWeatherIconView() {
 		addSubview(weatherIcon)
 		weatherIcon.setCenterY(inView: self)
-		weatherIcon.setAnchor(anchorTo: [.leading(padding: 15, isToSafeArea: true)], inView: self)
+		weatherIcon.setAnchor(anchorTo: [.leading(padding: 30, isToSafeArea: true)], inView: self)
 	}
 	
 	func configStackViews() {
-		let stack = UIStackView(arrangedSubviews: [cityName, temp, humidity])
-		stack.axis = .horizontal
-		stack.alignment = .center
-		stack.distribution = .equalSpacing
-		stack.spacing = 15
-		addSubview(stack)
-		
-		stack.setAnchor(anchorTo: [.trailing(padding: 30, isToSafeArea: true)], inView: self)
-		stack.setCenterY(inView: self)
-	}
-	
-	func updateViewCell() {
-		
+		let sv = UIStackView(byViews: [cityName, temp, humidity], isHorizontal: true, eachSpace: 15)
+		addSubview(sv)		
+		sv.setAnchor(anchorTo: [.trailing(padding: 30, isToSafeArea: true)], inView: self)
+		sv.setCenterY(inView: self)
 	}
 }

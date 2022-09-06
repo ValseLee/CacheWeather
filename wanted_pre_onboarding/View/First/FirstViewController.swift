@@ -83,7 +83,7 @@ extension FirstViewController: UITableViewDataSource {
 		
 		cell.weatherIcon.image = viewModel?.loadCacheImage(url: imageUrl, cityName: weatherInfoArray.name)
 		cell.temp.text = String(weatherInfoArray.main.temp) + "°C"
-		cell.humidity.text = "습도: " + String(weatherInfoArray.main.humidity)
+		cell.humidity.text = "습도: " + String(weatherInfoArray.main.humidity) + "%"
 		cell.cityName.text = String(weatherInfoArray.name)
 		
 		return cell
@@ -91,7 +91,7 @@ extension FirstViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let weatherInfoArray = viewModel?.weatherInfoList[indexPath.row]
-		let vc = SeconcdViewController(cityName: weatherInfoArray!.name, viewModel: viewModel!, weatherInfoArray: weatherInfoArray!)
+		let vc = SeconcdViewController(cityName: weatherInfoArray!.name, viewModel: viewModel!, weatherInfoArray: weatherInfoArray!)		
 		navigationController?.pushViewController(vc, animated: true)
 	}
 }
