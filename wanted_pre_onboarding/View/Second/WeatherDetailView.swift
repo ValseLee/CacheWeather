@@ -8,42 +8,39 @@
 import UIKit
 
 final class WeatherDetailView: UIView {
-	private let weatherIcon: WeatherIconView = {
-		let iv = WeatherIconView(size: 75)
-		return iv
+	private let weatherIconView: UIImageView = {
+		return WeatherIconView(size: 75)
 	}()
 	
 	private let temp: UILabel = {
-		let la = UILabel()
-		return la
+		return CustomWeatherInfoLabel(category: .temp)
 	}()
 	
 	private let feelsLike: UILabel = {
-		let la = UILabel()
-		return la
+		return CustomWeatherInfoLabel(category: .feelsLike)
 	}()
 	
 	private let tempMin: UILabel = {
-		let la = UILabel()
-		return la
+		return CustomWeatherInfoLabel(category: .tempMin)
 	}()
 	
 	private let tempMax: UILabel = {
-		let la = UILabel()
-		return la
+		return CustomWeatherInfoLabel(category: .tempMax)
 	}()
 	
 	private let pressure: UILabel = {
-		let la = UILabel()
-		return la
+		return CustomWeatherInfoLabel(category: .pressure)
 	}()
 	
 	private let windSpeed: UILabel = {
-		let la = UILabel()
-		return la
+		return CustomWeatherInfoLabel(category: .windSpeed)
 	}()
 	
+	private let descriptionLabel: UILabel = {
+		return CustomWeatherInfoLabel(category: .description)
+	}()
 	
+	// MARK: LifeCycle
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		configUI()
@@ -53,13 +50,39 @@ final class WeatherDetailView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func configUI() {
+	private func configUI() {
 		configWeatherIconView()
+		configStackView()
 	}
 	
-	func configWeatherIconView() {
-		addSubview(weatherIcon)
-		weatherIcon.setCenterX(inView: self)
-		weatherIcon.setAnchor(anchorTo: [.top(padding: 30, isToSafeArea: true)], inView: self)
+	private func configWeatherIconView() {
+		addSubview(weatherIconView)
+		weatherIconView.setCenterX(inView: self)
+		weatherIconView.setAnchor(anchorTo: [.top(padding: 30, isToSafeArea: true)], inView: self)
+	}
+	
+	private func configStackView() {
+		let tempStack = UIStackView(byViews: [temp, feelsLike], isHorizontal: true, eachSpace: 15)
+		let tempRangeStack = UIStackView(byViews: [tempMin, tempMax], isHorizontal: true, eachSpace: 15)
+		let atmosStack = UIStackView(byViews: [pressure, windSpeed], isHorizontal: true, eachSpace: 15)
+		let wholeStack = UIStackView(byViews: [tempStack, tempRangeStack, atmosStack, descriptionLabel], isHorizontal: false, eachSpace: 45)
+		
+		addSubview(wholeStack)
+		wholeStack.setAnchorTRBL(top: weatherIconView.bottomAnchor, paddingTop: 100)
+		wholeStack.setCenterX(inView: self)
+	}
+	
+	public func updateImage(weatherIcon: UIImage) {
+		weatherIconView.image = weatherIcon
+	}
+	
+	public func updateUI(weatherInfoForEach: WeatherInfoForEach) {
+		temp.text = "현재 기온 : " + weatherInfoForEach.temp + "°C"
+		feelsLike.text = "체감 기온 : " + weatherInfoForEach.feelsLike + "°C"
+		tempMax.text = "최고 기온 : " + weatherInfoForEach.tempMax + "°C"
+		tempMin.text = "최저 기온 : " + weatherInfoForEach.tempMin + "°C"
+		pressure.text = "기압 : " + weatherInfoForEach.pressure + "hPa"
+		windSpeed.text = "풍속 : " + weatherInfoForEach.windSpeed + "m/s"
+		descriptionLabel.text = weatherInfoForEach.description
 	}
 }

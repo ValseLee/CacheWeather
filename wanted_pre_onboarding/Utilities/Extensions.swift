@@ -120,3 +120,18 @@ extension UIViewController {
 		navigationItem.title = title
 	}
 }
+
+// MARK: UIStackView
+extension UIStackView {
+	convenience init(byViews: [UIView], isHorizontal: Bool, eachSpace: Int) {
+		self.init(arrangedSubviews: byViews)
+		spacing = CGFloat(eachSpace)
+		alignment = .center
+		distribution = .equalSpacing
+		if isHorizontal {
+			axis = .horizontal
+		} else {
+			axis = .vertical
+		}
+	}
+}
