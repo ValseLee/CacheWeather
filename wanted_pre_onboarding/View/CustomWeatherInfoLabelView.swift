@@ -32,7 +32,10 @@ final class CustomWeatherInfoLabel: UILabel {
 				textColor = .black
 			case .description:
 				textColor = .black
-				font = .boldSystemFont(ofSize: 28)
+				font = .boldSystemFont(ofSize: 24)
+			case .cityNameLarge:
+				textColor = .black
+				font = .boldSystemFont(ofSize: 24)
 		}
 	}
 	
@@ -50,5 +53,6 @@ final class CustomWeatherInfoLabel: UILabel {
 		case humidity
 		case windSpeed
 		case description
+		case cityNameLarge
 	}
 }

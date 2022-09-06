@@ -12,6 +12,10 @@ final class WeatherDetailView: UIView {
 		return WeatherIconView(size: 75)
 	}()
 	
+	private let cityName: UILabel = {
+		return CustomWeatherInfoLabel(category: .cityNameLarge)
+	}()
+	
 	private let temp: UILabel = {
 		return CustomWeatherInfoLabel(category: .temp)
 	}()
@@ -34,6 +38,10 @@ final class WeatherDetailView: UIView {
 	
 	private let windSpeed: UILabel = {
 		return CustomWeatherInfoLabel(category: .windSpeed)
+	}()
+	
+	private let humidLabel: UILabel = {
+		return CustomWeatherInfoLabel(category: .humidity)
 	}()
 	
 	private let descriptionLabel: UILabel = {
@@ -65,10 +73,10 @@ final class WeatherDetailView: UIView {
 		let tempStack = UIStackView(byViews: [temp, feelsLike], isHorizontal: true, eachSpace: 15)
 		let tempRangeStack = UIStackView(byViews: [tempMin, tempMax], isHorizontal: true, eachSpace: 15)
 		let atmosStack = UIStackView(byViews: [pressure, windSpeed], isHorizontal: true, eachSpace: 15)
-		let wholeStack = UIStackView(byViews: [tempStack, tempRangeStack, atmosStack, descriptionLabel], isHorizontal: false, eachSpace: 45)
+		let wholeStack = UIStackView(byViews: [cityName, tempStack, tempRangeStack, atmosStack, humidLabel, descriptionLabel], isHorizontal: false, eachSpace: 45)
 		
 		addSubview(wholeStack)
-		wholeStack.setAnchorTRBL(top: weatherIconView.bottomAnchor, paddingTop: 100)
+		wholeStack.setAnchorTRBL(top: weatherIconView.bottomAnchor, paddingTop: 50)
 		wholeStack.setCenterX(inView: self)
 	}
 	
@@ -77,12 +85,14 @@ final class WeatherDetailView: UIView {
 	}
 	
 	public func updateUI(weatherInfoForEach: WeatherInfoForEach) {
+		cityName.text = "도시 : " + weatherInfoForEach.cityName
 		temp.text = "현재 기온 : " + weatherInfoForEach.temp + "°C"
 		feelsLike.text = "체감 기온 : " + weatherInfoForEach.feelsLike + "°C"
 		tempMax.text = "최고 기온 : " + weatherInfoForEach.tempMax + "°C"
 		tempMin.text = "최저 기온 : " + weatherInfoForEach.tempMin + "°C"
 		pressure.text = "기압 : " + weatherInfoForEach.pressure + "hPa"
 		windSpeed.text = "풍속 : " + weatherInfoForEach.windSpeed + "m/s"
-		descriptionLabel.text = weatherInfoForEach.description
+		humidLabel.text = "현재 습도 : " + weatherInfoForEach.humidity + "%"
+		descriptionLabel.text = "현재 날씨는 \(weatherInfoForEach.description) 상태입니다!"
 	}
 }
