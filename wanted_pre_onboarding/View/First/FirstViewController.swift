@@ -78,10 +78,11 @@ extension FirstViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as! FirstTableViewCell
 		let weatherInfoArray = viewModel!.weatherInfoList[indexPath.row]
-		let weatherIcon = viewModel!.weatherIconList[indexPath.row]
-
-		cell.weatherIcon.image = weatherIcon
-		cell.temp.text = String(weatherInfoArray.main.temp) + "'C"
+		let icon = weatherInfoArray.weather[0].icon
+		let imageUrl = "https://openweathermap.org/img/wn/\(icon)@2x.png"
+		
+		cell.weatherIcon.image = viewModel?.loadCacheImage(url: imageUrl, cityName: weatherInfoArray.name)
+		cell.temp.text = String(weatherInfoArray.main.temp) + "°C"
 		cell.humidity.text = "습도: " + String(weatherInfoArray.main.humidity)
 		cell.cityName.text = String(weatherInfoArray.name)
 		

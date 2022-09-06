@@ -14,9 +14,9 @@ final class WeatherNetwork {
 	private let imageManager = ImageProvider.shared
 	private let cityList = CityList()
 	
-	var viewModelDelegate: WeatherDetailViewModel?
+	public var viewModelDelegate: WeatherDetailViewModel?
 
-	func fetchWeatherData(completion: @escaping NetworkCompletion) {
+	public func fetchWeatherData(completion: @escaping NetworkCompletion) {
 		let cityIdList = cityList.getCityId()
 		let appid = "7f55bd940bdfc44417b670cd85cbccac"
 		let urlString = "https://api.openweathermap.org/data/2.5/group?id=\(cityIdList)&units=metric&appid=\(appid)&lang=kr"
@@ -35,25 +35,22 @@ final class WeatherNetwork {
 				completion(.failure(.networkingError))
 				return
 			}
+			guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+				completion(.failure(.requestError))
+				return
+			}
 			guard let safeData = data else {
 				completion(.failure(.dataError))
 				return
 			}
 			
-			guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-				completion(.failure(.requestError))
-				return
-			}
-			
-			// cityname 도 함께 전달해야 key 세팅이 온전하게 된다.
-			// 내일 여기부터 작업
 			if let weathers = self.parseJSON(safeData) {
-				let iconArray = weathers.map { $0.weather[0].icon }
-				iconArray.forEach { str in
-					let url = "https://openweathermap.org/img/wn/\(str)@2x.png"
-					let cityName = weathers[0].name
-					self.imageManager.loadImage(imageURL: url, cityName: cityName) { image in
-						self.viewModelDelegate?.weatherIconList.append(image!)
+				DispatchQueue.global(qos: .utility).async {
+					weathers.forEach { list in
+						let cityWeatherIcon = list.weather[0].icon
+						let cityName = list.name
+						let url = "https://openweathermap.org/img/wn/\(cityWeatherIcon)@2x.png"
+						self.imageManager.loadImage(imageURL: url, cityName: cityName)
 					}
 				}
 				completion(.success(weathers))

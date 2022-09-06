@@ -66,6 +66,13 @@ enum MainEnum: String, Codable {
 	case clouds = "Clouds"
 	case rain = "Rain"
 	case mist = "Mist"
+	case clear = "Clear"
+	case snow = "Snow"
+	case thunderstorm = "Thunderstorm"
+	case drizzle = "Drizzle"
+	case dust = "Dust"
+	case sand = "Sand"
+	case smoke = "Smoke"
 }
 
 struct Wind: Codable {
