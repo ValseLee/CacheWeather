@@ -14,24 +14,14 @@ struct WeatherInfo: Codable {
 }
 
 struct WeatherInfoList: Codable {
-	let coord: Coord
 	let weather: [WeatherElement]
-	let main: MainClass
+	let main: MainStruct
 	let wind: Wind
 	let dt: Int
 	let name: String
-//	let clouds: Clouds
 }
 
-//struct Clouds: Codable {
-//	let all: Int
-//}
-
-struct Coord: Codable {
-	let lon, lat: Double
-}
-
-struct MainClass: Codable {
+struct MainStruct: Codable {
 	let temp, feelsLike, tempMin, tempMax: Double
 	let pressure: Int
 	let humidity: Int
