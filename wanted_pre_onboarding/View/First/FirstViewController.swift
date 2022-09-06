@@ -10,14 +10,8 @@ import UIKit
 final class FirstViewController: UIViewController {
 	private let weatherTableView = UITableView(frame: .zero)
 	private var viewModel: WeatherDetailViewModel?
+	private var activeIndicator = UIActivityIndicatorView(style: .large)
 	
-	private let mainLabel: UILabel = {
-		let la = UILabel()
-		la.text = "Wanted Pre Onboarding"
-		la.font = .boldSystemFont(ofSize: 28)
-		return la
-	}()
-
 	// MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,21 +30,23 @@ final class FirstViewController: UIViewController {
 	}
 	
 	// MARK: Configs
-	func configUI() {
-		configMainLabelView()
+	private func configUI() {
 		configNavBarUI(withTitle: "One Weather", prefersLargerTitle: true, isHidden: false)
 		configTableView()
 	}
 	
-	func configMainLabelView() {
-		view.addSubview(mainLabel)
-		mainLabel.setAnchor(anchorTo: [.top(padding: 30, isToSafeArea: true)], inView: view)
-		mainLabel.setCenterX(inView: view)
+	private func activateIndicator() {
+		weatherTableView.addSubview(activeIndicator)
+		activeIndicator.color = .systemPink.withAlphaComponent(0.4)
+		activeIndicator.setCenterX(inView: weatherTableView)
+		activeIndicator.setCenterY(inView: view)
+		activeIndicator.startAnimating()
 	}
 	
-	func configTableView() {
+	private func configTableView() {
 		view.addSubview(weatherTableView)
-		weatherTableView.setAnchorTRBL(top: mainLabel.bottomAnchor, right: view.rightAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, left: view.leftAnchor, paddingTop: 50, paddingBottom: -10)
+		activateIndicator()
+		weatherTableView.setAnchorTRBL(top: view.topAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, left: view.leftAnchor, paddingTop: 10, paddingRight: 0, paddingBottom: -10, paddingLeft: 0)
 		weatherTableView.register(FirstTableViewCell.self, forCellReuseIdentifier: "TABLE_CELL")
 		weatherTableView.isScrollEnabled = true
 		weatherTableView.dataSource = self
@@ -64,6 +60,7 @@ final class FirstViewController: UIViewController {
 			UIView.transition(with: self.weatherTableView,
 							  duration: 0.55,
 							  options: .transitionCrossDissolve) {
+				self.activeIndicator.removeFromSuperview()
 				self.weatherTableView.reloadData()
 			}
 		}
