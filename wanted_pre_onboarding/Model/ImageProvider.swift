@@ -9,7 +9,7 @@ import UIKit
 
 final class ImageProvider {
 	static let shared = ImageProvider()
-	public let weatherIconCache: NSCache = NSCache<NSString, UIImage>()
+	private let weatherIconCache: NSCache = NSCache<NSString, UIImage>()
 
 	public func loadImage(imageURL: String, cityName: String, completion: @escaping (UIImage?) -> Void) {
 		if let image = weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
@@ -22,6 +22,20 @@ final class ImageProvider {
 			let image = UIImage(data: imageData)
 			weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
 			completion(image)
+			return
+		}
+	}
+	
+	// MARK: Image Init
+	public func loadImage(imageURL: String, cityName: String) {
+		if let _ = weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
+			return
+		}
+		
+		guard let safeUrl = URL(string: imageURL) else { return }
+		if let imageData = try? Data(contentsOf: URL(string: "\(safeUrl)")!) {
+			let image = UIImage(data: imageData)
+			weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
 			return
 		}
 	}
