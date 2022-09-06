@@ -23,6 +23,7 @@
 		7037805028C5CD5A002D468F /* CustomWeatherInfoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037804F28C5CD5A002D468F /* CustomWeatherInfoLabelView.swift */; };
 		7037805428C60ACD002D468F /* ImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037805328C60ACD002D468F /* ImageProvider.swift */; };
 		707A5BA228C230AA00100438 /* WeatherDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707A5BA128C230AA00100438 /* WeatherDetailView.swift */; };
+		708DF12128C71E9A009F8A69 /* WeatherInfoForEach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708DF12028C71E9A009F8A69 /* WeatherInfoForEach.swift */; };
 		70C8AA9728C4553B00B1A2D6 /* WeatherIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C8AA9628C4553B00B1A2D6 /* WeatherIconView.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		7037805328C60ACD002D468F /* ImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProvider.swift; sourceTree = "<group>"; };
 		707A5BA128C230AA00100438 /* WeatherDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailView.swift; sourceTree = "<group>"; };
 		7083723428C38E3300AFECDB /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
+		708DF12028C71E9A009F8A69 /* WeatherInfoForEach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoForEach.swift; sourceTree = "<group>"; };
 		70C8AA9628C4553B00B1A2D6 /* WeatherIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 			children = (
 				700DDC0D28C4A4CE00131948 /* WeatherDetailViewModel.swift */,
 				7083723428C38E3300AFECDB /* WeatherInfo.swift */,
+				708DF12028C71E9A009F8A69 /* WeatherInfoForEach.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				7027B2A728C1A4B000CE78AB /* AppDelegate.swift in Sources */,
 				7035055628C2160400CB6478 /* SeconcdViewController.swift in Sources */,
 				7037805028C5CD5A002D468F /* CustomWeatherInfoLabelView.swift in Sources */,
+				708DF12128C71E9A009F8A69 /* WeatherInfoForEach.swift in Sources */,
 				7035055428C1ABF400CB6478 /* WeatherNetwork.swift in Sources */,
 				7037804E28C59B3D002D468F /* WeatherInfo.swift in Sources */,
 				7027B2A928C1A4B000CE78AB /* SceneDelegate.swift in Sources */,
