@@ -17,29 +17,34 @@ final class WeatherDetailViewModel {
 	lazy var weatherInfoList = [WeatherInfoList]()
 	lazy var weatherIconList = [UIImage]()
 	lazy var weatherIconCache = NSCache<NSString, UIImage>()
+	lazy var weatherIconCacheImage = UIImage()
 	
 	public init() {
 		fetchData()
 		networkManager.viewModelDelegate = self
 		weatherIconCache = imageCache.getWeatherIconCache()
-		dump(weatherIconCache)
 	}
 	
 	public func fetchData() {
-		networkManager.fetchWeatherData { [weak self] (result) in
-			switch result {
-				case .success(let result):
-					self?.weatherInfoList = result as! [WeatherInfoList]
-					self?.firstViewControllerDelegate?.updateUI()
-				case .failure(let error):
-					dump(error)
+		DispatchQueue.global(qos: .utility).async {
+			self.networkManager.fetchWeatherData { [weak self] (result) in
+				switch result {
+					case .success(let result):
+						self?.weatherInfoList = result as! [WeatherInfoList]
+						self?.firstViewControllerDelegate?.updateUI()
+					case .failure(let error):
+						dump(error)
+				}
 			}
 		}
 	}
 	
-//	public func loadImage(imageURL: String, cityName: String, completion: @escaping (UIImage?) -> Void) {
-//		imageCache.loadImage(imageURL: imageURL, cityName: cityName) { (image) in
-//			// code
-//		}
-//	}
+	// MARK: load Cached Image
+	public func loadCacheImage(url: String, cityName: String) -> UIImage? {
+		imageCache.loadImage(imageURL: url, cityName: cityName) { image in
+			guard let image = image else { return }
+			self.weatherIconCacheImage = image
+		}
+		return weatherIconCacheImage
+	}
 }
