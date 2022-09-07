@@ -46,7 +46,7 @@ final class FirstViewController: UIViewController {
 	private func configTableView() {
 		view.addSubview(weatherTableView)
 		activateIndicator()
-		weatherTableView.setAnchorTRBL(top: view.topAnchor, right: view.rightAnchor, bottom: view.bottomAnchor, left: view.leftAnchor, paddingTop: 10, paddingRight: 0, paddingBottom: -10, paddingLeft: 0)
+		weatherTableView.setAnchorTRBL(top: view.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 10, paddingRight: 0, paddingBottom: -10, paddingLeft: 0)
 		weatherTableView.register(FirstTableViewCell.self, forCellReuseIdentifier: "TABLE_CELL")
 		weatherTableView.isScrollEnabled = true
 		weatherTableView.dataSource = self
@@ -58,10 +58,10 @@ final class FirstViewController: UIViewController {
 	func updateUI() {
 		DispatchQueue.main.async {
 			UIView.transition(with: self.weatherTableView,
-							  duration: 0.55,
+							  duration: 0.45,
 							  options: .transitionCrossDissolve) {
-				self.activeIndicator.removeFromSuperview()
 				self.weatherTableView.reloadData()
+				self.activeIndicator.removeFromSuperview()
 			}
 		}
 	}
@@ -75,20 +75,21 @@ extension FirstViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as! FirstTableViewCell
 		let weatherInfoArray = viewModel!.weatherInfoList[indexPath.row]
-		let icon = weatherInfoArray.weather[0].icon
-		let imageUrl = "https://openweathermap.org/img/wn/\(icon)@2x.png"
+		let weatherInfoForEach = WeatherInfoForEach.init(weatherInfo: weatherInfoArray, setViewModel: viewModel!)
 		
-		cell.weatherIcon.image = viewModel?.loadCacheImage(url: imageUrl, cityName: weatherInfoArray.name)
-		cell.temp.text = String(weatherInfoArray.main.temp) + "°C"
-		cell.humidity.text = "습도: " + String(weatherInfoArray.main.humidity) + "%"
-		cell.cityName.text = String(weatherInfoArray.name)
+		cell.weatherIcon.image = weatherInfoForEach.getIconImage()
+		cell.temp.text = weatherInfoForEach.temp + "°C"
+		cell.cityName.text = weatherInfoForEach.cityName
+		cell.humidity.text = weatherInfoForEach.humidity + "%"
 		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let weatherInfoArray = viewModel?.weatherInfoList[indexPath.row]
-		let vc = SeconcdViewController(cityName: weatherInfoArray!.name, viewModel: viewModel!, weatherInfoArray: weatherInfoArray!)		
+		let weatherInfoForEach = WeatherInfoForEach.init(weatherInfo: weatherInfoArray!, setViewModel: viewModel!)
+		
+		let vc = SeconcdViewController(cityName: weatherInfoForEach.cityName, viewModel: viewModel!, weatherInfo: weatherInfoForEach)
 		navigationController?.pushViewController(vc, animated: true)
 	}
 }
