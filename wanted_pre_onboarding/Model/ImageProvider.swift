@@ -12,8 +12,25 @@ final class ImageProvider {
 	private let weatherIconCache: NSCache = NSCache<NSString, UIImage>()
 
 	public func loadImage(imageURL: String, cityName: String, completion: @escaping (UIImage?) -> Void) {
-		if let image = weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
-			completion(image)
+		DispatchQueue.global(qos: .userInteractive).async {
+			if let image = self.weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
+				completion(image)
+				return
+			}
+			
+			guard let safeUrl = URL(string: imageURL) else { return }
+			if let imageData = try? Data(contentsOf: URL(string: "\(safeUrl)")!) {
+				let image = UIImage(data: imageData)
+				self.weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
+				completion(image)
+				return
+			}
+		}
+	}
+	
+	// MARK: Image Init
+	public func loadImage(imageURL: String, cityName: String) {
+		if let _ = weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
 			return
 		}
 		
@@ -21,21 +38,6 @@ final class ImageProvider {
 		if let imageData = try? Data(contentsOf: URL(string: "\(safeUrl)")!) {
 			let image = UIImage(data: imageData)
 			weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
-			completion(image)
-			return
-		}
-	}
-	
-	// MARK: Image Init
-	public func loadImage(imageURL: String, cityName: String) {
-		if let _ = self.weatherIconCache.object(forKey: "\(imageURL + cityName)" as NSString) {
-			return
-		}
-		
-		guard let safeUrl = URL(string: imageURL) else { return }
-		if let imageData = try? Data(contentsOf: URL(string: "\(safeUrl)")!) {
-			let image = UIImage(data: imageData)
-			self.weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
 			return
 		}
 	}

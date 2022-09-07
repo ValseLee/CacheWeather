@@ -11,7 +11,7 @@ final class WeatherNetwork {
 	typealias NetworkCompletion = (Result<Any, NetworkError>) -> Void
 	static let shared = WeatherNetwork()
 	
-	private let imageManager = ImageProvider.shared
+	private let imageCacheManager = ImageProvider.shared
 	private let cityList = CityList()
 	
 	public var viewModelDelegate: WeatherDetailViewModel?
@@ -50,10 +50,10 @@ final class WeatherNetwork {
 						let cityWeatherIcon = list.weather[0].icon
 						let cityName = list.name
 						let url = "https://openweathermap.org/img/wn/\(cityWeatherIcon)@2x.png"
-						self.imageManager.loadImage(imageURL: url, cityName: cityName)
+						self.imageCacheManager.loadImage(imageURL: url, cityName: cityName)
+						completion(.success(weathers))
 					}
 				}
-				completion(.success(weathers))
 			}
 			else {
 				completion(.failure(.parseError))
@@ -61,6 +61,7 @@ final class WeatherNetwork {
 		}
 		task.resume()
 	}
+	
 	
 	private func parseJSON(_ resultData: Data) -> [WeatherInfoList]? {
 		do {
