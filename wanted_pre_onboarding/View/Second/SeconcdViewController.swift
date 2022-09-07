@@ -12,15 +12,14 @@ final class SeconcdViewController: UIViewController {
 	private var weatherInfoForEach: WeatherInfoForEach?
 	
 	private var viewModel: WeatherDetailViewModel?
-	private var weatherInfoArray: WeatherInfoList?
 	private var cityName: String?
 	
 	// MARK: LifeCycle
-	init(cityName: String, viewModel: WeatherDetailViewModel, weatherInfoArray: WeatherInfoList) {
+	init(cityName: String, viewModel: WeatherDetailViewModel, weatherInfo: WeatherInfoForEach) {
 		super.init(nibName: nil, bundle: nil)
 		self.cityName = cityName
 		self.viewModel = viewModel
-		self.weatherInfoArray = weatherInfoArray
+		self.weatherInfoForEach = weatherInfo
 		self.loadImageFromCache()
 	}
 	
@@ -43,23 +42,20 @@ final class SeconcdViewController: UIViewController {
 		weatherDetailView.setCenterX(inView: view)
 	}
 	
-	private func setupData() {
-		weatherInfoForEach = WeatherInfoForEach(weatherInfo: weatherInfoArray!)
-	}
-	
 	private func loadImageFromCache() {
-		let icon = weatherInfoArray!.weather[0].icon
+		let icon = weatherInfoForEach!.icon
 		let imageUrl = "https://openweathermap.org/img/wn/\(icon)@2x.png"
-		let cacheImage = viewModel?.loadCacheImage(url: imageUrl, cityName: cityName!)
-		
-		guard let cacheImage = cacheImage else { return }
-		setupData()
 		updateDetailView()
-		weatherDetailView.updateImage(weatherIcon: cacheImage)
+		
+		if let cachedImage = weatherInfoForEach?.getIconImage() {
+			weatherDetailView.updateImage(weatherIcon: cachedImage)
+		} else {
+			weatherDetailView.updateImage(weatherIcon: (viewModel?.loadImage(url: imageUrl, cityName: cityName!))!)
+		}
+		
 	}
-	
+
 	private func updateDetailView() {
-		guard let weatherInfoForEach = weatherInfoForEach else { return }
-		weatherDetailView.updateUI(weatherInfoForEach: weatherInfoForEach)
+		weatherDetailView.updateUI(weatherInfoForEach: weatherInfoForEach!)
 	}
 }

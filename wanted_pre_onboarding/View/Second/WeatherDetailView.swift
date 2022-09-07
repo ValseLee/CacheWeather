@@ -93,6 +93,6 @@ final class WeatherDetailView: UIView {
 		pressure.text = "기압 : " + weatherInfoForEach.pressure + "hPa"
 		windSpeed.text = "풍속 : " + weatherInfoForEach.windSpeed + "m/s"
 		humidLabel.text = "현재 습도 : " + weatherInfoForEach.humidity + "%"
-		descriptionLabel.text = "현재 날씨는 \(weatherInfoForEach.description) 상태입니다!"
+		descriptionLabel.text = "현재 날씨는 " + "\(weatherInfoForEach.description) 상태입니다!"
 	}
 }
