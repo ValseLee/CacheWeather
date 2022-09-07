@@ -9,7 +9,7 @@ import UIKit
 
 final class WeatherDetailViewModel {
 	private let networkManager = WeatherNetwork.shared
-	private let imageCache = ImageProvider.shared
+	private let imageCacheManager = ImageProvider.shared
 	
 	weak var firstViewControllerDelegate: FirstViewController? = nil
 	weak var secondViewControllerDelegate: SeconcdViewController? = nil
@@ -18,12 +18,12 @@ final class WeatherDetailViewModel {
 	
 	lazy var weatherIconList = [UIImage]()
 	lazy var weatherIconCache = NSCache<NSString, UIImage>()
-	lazy var weatherIconCacheImage = UIImage()
+	lazy var weatherIconImage = UIImage()
 	
 	public init() {
 		fetchData()
 		networkManager.viewModelDelegate = self
-		weatherIconCache = imageCache.getWeatherIconCache()
+		weatherIconCache = imageCacheManager.getWeatherIconCache()
 	}
 	
 	public func fetchData() {
@@ -38,12 +38,17 @@ final class WeatherDetailViewModel {
 		}
 	}
 	
-	// MARK: load Cached Image
-	public func loadCacheImage(url: String, cityName: String) -> UIImage? {
-		imageCache.loadImage(imageURL: url, cityName: cityName) { image in
+	public func loadImage(url: String, cityName: String) -> UIImage? {
+		self.imageCacheManager.loadImage(imageURL: url, cityName: cityName) { [weak self] image in
 			guard let image = image else { return }
-			self.weatherIconCacheImage = image
+			self?.weatherIconImage = image
 		}
-		return weatherIconCacheImage
+		return weatherIconImage
+	}
+	
+	// MARK: load Cached Image
+	public func loadCachedImage(url: String, cityName: String) -> UIImage? {
+		let identifier = url + cityName
+		return weatherIconCache.object(forKey: identifier as NSString)
 	}
 }
