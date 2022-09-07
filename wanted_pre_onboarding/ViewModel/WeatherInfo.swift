@@ -63,6 +63,7 @@ enum MainEnum: String, Codable {
 	case dust = "Dust"
 	case sand = "Sand"
 	case smoke = "Smoke"
+	case fog = "Fog"
 }
 
 struct Wind: Codable {
