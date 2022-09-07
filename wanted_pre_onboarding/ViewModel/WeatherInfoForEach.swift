@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct WeatherInfoForEach {
 	var temp: String
@@ -17,8 +18,12 @@ struct WeatherInfoForEach {
 	var windSpeed: String
 	var cityName: String
 	var description: String
+	var icon: String
+	var viewModel: WeatherDetailViewModel
 	
-	init(weatherInfo: WeatherInfoList) {
+	init(weatherInfo: WeatherInfoList, setViewModel: WeatherDetailViewModel) {
+		self.viewModel = setViewModel
+		
 		let weatherDetails = weatherInfo.main
 		
 		self.temp = String(weatherDetails.temp)
@@ -30,5 +35,16 @@ struct WeatherInfoForEach {
 		self.windSpeed = String(weatherInfo.wind.speed)
 		self.cityName = String(weatherInfo.name)
 		self.description = String(weatherInfo.weather[0].weatherDescription)
+		self.icon = String(weatherInfo.weather[0].icon)
+	}
+	
+	func getIconImage() -> UIImage? {
+		let imageUrl = "https://openweathermap.org/img/wn/\(icon)@2x.png"
+		let identifier = imageUrl + cityName
+		
+		if let image = viewModel.weatherIconCache.object(forKey: identifier as NSString) {
+			return image
+		}
+		return UIImage(systemName: "")
 	}
 }
