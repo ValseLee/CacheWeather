@@ -33,6 +33,7 @@ final class CustomWeatherInfoLabel: UILabel {
 			case .description:
 				textColor = .black
 				font = .boldSystemFont(ofSize: 24)
+				lineBreakMode = .byWordWrapping
 			case .cityNameLarge:
 				textColor = .black
 				font = .boldSystemFont(ofSize: 24)
