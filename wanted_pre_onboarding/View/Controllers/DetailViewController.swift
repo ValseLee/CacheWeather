@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SeconcdViewController: UIViewController {
+final class DetailViewController: UIViewController {
 	private let weatherDetailView = WeatherDetailView()
 	private var weatherInfoForEach: WeatherInfoForEach?
 	

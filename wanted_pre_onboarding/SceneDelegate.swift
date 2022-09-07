@@ -15,7 +15,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		window = UIWindow(windowScene: scene)
 		let viewModel = WeatherDetailViewModel()
-		let nav = UINavigationController(rootViewController: FirstViewController(setViewModel: viewModel))
+		let nav = UINavigationController(rootViewController: MainViewController(setViewModel: viewModel))
 		window?.rootViewController = nav
 		window?.makeKeyAndVisible()
 	}

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FirstTableViewCell: UITableViewCell {
+final class MainTableViewCell: UITableViewCell {
 
 	public var weatherIcon: UIImageView = {
 		return WeatherIconView(size: 50)

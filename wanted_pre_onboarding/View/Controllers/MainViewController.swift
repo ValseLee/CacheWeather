@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FirstViewController: UIViewController {
+final class MainViewController: UIViewController {
 	private let weatherTableView = UITableView(frame: .zero)
 	private var viewModel: WeatherDetailViewModel?
 	private var activeIndicator = UIActivityIndicatorView(style: .large)
@@ -22,7 +22,7 @@ final class FirstViewController: UIViewController {
 	init(setViewModel: WeatherDetailViewModel) {
 		super.init(nibName: nil, bundle: nil)
 		self.viewModel = setViewModel
-		self.viewModel?.firstViewControllerDelegate = self
+		self.viewModel?.mainViewControllerDelegate = self
 	}
 	
 	required init?(coder: NSCoder) {
@@ -47,7 +47,7 @@ final class FirstViewController: UIViewController {
 		view.addSubview(weatherTableView)
 		activateIndicator()
 		weatherTableView.setAnchorTRBL(top: view.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 10, paddingRight: 0, paddingBottom: -10, paddingLeft: 0)
-		weatherTableView.register(FirstTableViewCell.self, forCellReuseIdentifier: "TABLE_CELL")
+		weatherTableView.register(MainTableViewCell.self, forCellReuseIdentifier: "TABLE_CELL")
 		weatherTableView.isScrollEnabled = true
 		weatherTableView.dataSource = self
 		weatherTableView.delegate = self
@@ -60,20 +60,20 @@ final class FirstViewController: UIViewController {
 			UIView.transition(with: self.weatherTableView,
 							  duration: 0.45,
 							  options: .transitionCrossDissolve) {
-				self.weatherTableView.reloadData()
 				self.activeIndicator.removeFromSuperview()
+				self.weatherTableView.reloadData()
 			}
 		}
 	}
 }
 
-extension FirstViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return (viewModel?.weatherInfoList.count)!
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as! FirstTableViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: "TABLE_CELL", for: indexPath) as! MainTableViewCell
 		let weatherInfoArray = viewModel!.weatherInfoList[indexPath.row]
 		let weatherInfoForEach = WeatherInfoForEach.init(weatherInfo: weatherInfoArray, setViewModel: viewModel!)
 		
@@ -89,11 +89,11 @@ extension FirstViewController: UITableViewDataSource {
 		let weatherInfoArray = viewModel?.weatherInfoList[indexPath.row]
 		let weatherInfoForEach = WeatherInfoForEach.init(weatherInfo: weatherInfoArray!, setViewModel: viewModel!)
 		
-		let vc = SeconcdViewController(cityName: weatherInfoForEach.cityName, viewModel: viewModel!, weatherInfo: weatherInfoForEach)
+		let vc = DetailViewController(cityName: weatherInfoForEach.cityName, viewModel: viewModel!, weatherInfo: weatherInfoForEach)
 		navigationController?.pushViewController(vc, animated: true)
 	}
 }
 
-extension FirstViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
 	// code
 }

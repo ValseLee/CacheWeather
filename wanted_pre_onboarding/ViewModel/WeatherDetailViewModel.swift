@@ -11,11 +11,9 @@ final class WeatherDetailViewModel {
 	private let networkManager = WeatherNetwork.shared
 	private let imageCacheManager = ImageProvider.shared
 	
-	weak var firstViewControllerDelegate: FirstViewController? = nil
-	weak var secondViewControllerDelegate: SeconcdViewController? = nil
+	weak var mainViewControllerDelegate: MainViewController? = nil
 	
 	lazy var weatherInfoList = [WeatherInfoList]()
-	
 	lazy var weatherIconList = [UIImage]()
 	lazy var weatherIconCache = NSCache<NSString, UIImage>()
 	lazy var weatherIconImage = UIImage()
@@ -31,7 +29,7 @@ final class WeatherDetailViewModel {
 			switch result {
 				case .success(let result):
 					self?.weatherInfoList = result as! [WeatherInfoList]
-					self?.firstViewControllerDelegate?.updateUI()
+					self?.mainViewControllerDelegate?.updateUI()
 				case .failure(let error):
 					dump(error)
 			}
