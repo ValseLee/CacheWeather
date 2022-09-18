@@ -1,10 +1,10 @@
-# wanted_pre_onboarding
+# CacheWeather App!
 ---
 
 ## Intro
 ---
 
-한 화면에서 대한민국 주요 도시의 날씨 정보를 볼 수 있는 `One Weather` 앱을 소개합니다.   
+한 화면에서 대한민국 주요 도시의 날씨 정보를 볼 수 있는 `Cache Weather` 앱을 소개합니다.   
    
 <img width="275" alt="스크린샷 2022-09-07 오후 12 38 53" src="https://user-images.githubusercontent.com/82270058/188783494-b4385b91-7f1a-480c-be70-59762b369a64.png">
 
@@ -24,8 +24,10 @@
 
 - 각 뷰에서 이미지를 로딩하기 위해 소요되는 속도를 `NSCache` 를 활용하여 단축
 - 분기 처리를 통해 캐시 로딩되지 않을 때 필요한 아이콘만 따로 이미지를 로드할 수 있도록 지원
+- 원활한 UX를 위한 이미지 처리와 로딩 인디케이터 활용
 
 3. `Open Weather API` 에서 제공하는 다양한 날씨 정보 열람 가능
 
 > Starts at 220902.
 > Ends at 220907.
+> Updates at 220918.
