@@ -29,8 +29,8 @@
 
 /* Begin PBXFileReference section */
 		700DDC0928C4621000131948 /* CityLIst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityLIst.swift; sourceTree = "<group>"; };
-		700DDC0D28C4A4CE00131948 /* WeatherDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherDetailViewModel.swift; path = wanted_pre_onboarding/ViewModel/WeatherDetailViewModel.swift; sourceTree = SOURCE_ROOT; };
-		7027B2A328C1A4B000CE78AB /* wanted_pre_onboarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wanted_pre_onboarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		700DDC0D28C4A4CE00131948 /* WeatherDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDetailViewModel.swift; sourceTree = "<group>"; };
+		7027B2A328C1A4B000CE78AB /* CacheWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CacheWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7027B2A628C1A4B000CE78AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7027B2A828C1A4B000CE78AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7027B2AA28C1A4B000CE78AB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		7027B29A28C1A4B000CE78AB = {
 			isa = PBXGroup;
 			children = (
-				7027B2A528C1A4B000CE78AB /* wanted_pre_onboarding */,
+				7027B2A528C1A4B000CE78AB /* CacheWeather */,
 				7027B2A428C1A4B000CE78AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,12 +72,12 @@
 		7027B2A428C1A4B000CE78AB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7027B2A328C1A4B000CE78AB /* wanted_pre_onboarding.app */,
+				7027B2A328C1A4B000CE78AB /* CacheWeather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7027B2A528C1A4B000CE78AB /* wanted_pre_onboarding */ = {
+		7027B2A528C1A4B000CE78AB /* CacheWeather */ = {
 			isa = PBXGroup;
 			children = (
 				7027B2A628C1A4B000CE78AB /* AppDelegate.swift */,
@@ -91,7 +91,7 @@
 				7027B2B128C1A4B100CE78AB /* LaunchScreen.storyboard */,
 				7027B2B428C1A4B100CE78AB /* Info.plist */,
 			);
-			path = wanted_pre_onboarding;
+			path = CacheWeather;
 			sourceTree = "<group>";
 		};
 		7035054F28C1A95D00CB6478 /* Model */ = {
@@ -154,9 +154,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7027B2A228C1A4B000CE78AB /* wanted_pre_onboarding */ = {
+		7027B2A228C1A4B000CE78AB /* CacheWeather */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7027B2B728C1A4B100CE78AB /* Build configuration list for PBXNativeTarget "wanted_pre_onboarding" */;
+			buildConfigurationList = 7027B2B728C1A4B100CE78AB /* Build configuration list for PBXNativeTarget "CacheWeather" */;
 			buildPhases = (
 				7027B29F28C1A4B000CE78AB /* Sources */,
 				7027B2A028C1A4B000CE78AB /* Frameworks */,
@@ -166,9 +166,9 @@
 			);
 			dependencies = (
 			);
-			name = wanted_pre_onboarding;
+			name = CacheWeather;
 			productName = wanted_pre_onboarding;
-			productReference = 7027B2A328C1A4B000CE78AB /* wanted_pre_onboarding.app */;
+			productReference = 7027B2A328C1A4B000CE78AB /* CacheWeather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7027B29E28C1A4B000CE78AB /* Build configuration list for PBXProject "wanted_pre_onboarding" */;
+			buildConfigurationList = 7027B29E28C1A4B000CE78AB /* Build configuration list for PBXProject "CacheWeather" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -199,7 +199,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7027B2A228C1A4B000CE78AB /* wanted_pre_onboarding */,
+				7027B2A228C1A4B000CE78AB /* CacheWeather */,
 			);
 		};
 /* End PBXProject section */
@@ -385,7 +385,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 67M6ZS7KS6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = wanted_pre_onboarding/Info.plist;
+				INFOPLIST_FILE = CacheWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -397,7 +397,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Valse.wanted-pre-onboarding";
+				PRODUCT_BUNDLE_IDENTIFIER = Valse.CacheWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -414,7 +414,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 67M6ZS7KS6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = wanted_pre_onboarding/Info.plist;
+				INFOPLIST_FILE = CacheWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -426,7 +426,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Valse.wanted-pre-onboarding";
+				PRODUCT_BUNDLE_IDENTIFIER = Valse.CacheWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -437,7 +437,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7027B29E28C1A4B000CE78AB /* Build configuration list for PBXProject "wanted_pre_onboarding" */ = {
+		7027B29E28C1A4B000CE78AB /* Build configuration list for PBXProject "CacheWeather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7027B2B528C1A4B100CE78AB /* Debug */,
@@ -446,7 +446,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7027B2B728C1A4B100CE78AB /* Build configuration list for PBXNativeTarget "wanted_pre_onboarding" */ = {
+		7027B2B728C1A4B100CE78AB /* Build configuration list for PBXNativeTarget "CacheWeather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7027B2B828C1A4B100CE78AB /* Debug */,

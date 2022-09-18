@@ -10,6 +10,7 @@ import UIKit
 final class ImageProvider {
 	static let shared = ImageProvider()
 	private let weatherIconCache: NSCache = NSCache<NSString, UIImage>()
+    private var imageCnt = 0
 
 	public func loadImage(imageURL: String, cityName: String, completion: @escaping (UIImage?) -> Void) {
 		DispatchQueue.global(qos: .userInteractive).async {
@@ -38,6 +39,11 @@ final class ImageProvider {
 		if let imageData = try? Data(contentsOf: URL(string: "\(safeUrl)")!) {
 			let image = UIImage(data: imageData)
 			weatherIconCache.setObject(image!, forKey: "\(imageURL + cityName)" as NSString)
+            imageCnt += 1
+            if imageCnt == 20 {
+                NotificationCenter.default.post(name: .imageLoadCompleted, object: nil)
+                imageCnt = 0
+            }
 			return
 		}
 	}
@@ -45,6 +51,6 @@ final class ImageProvider {
 	public func getWeatherIconCache() -> NSCache<NSString, UIImage> {
 		weatherIconCache
 	}
-	
+    
 	private init() {}
 }

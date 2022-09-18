@@ -135,3 +135,9 @@ extension UIStackView {
 		}
 	}
 }
+
+extension NSNotification.Name {
+    static var imageLoadCompleted: Notification.Name {
+        return .init(rawValue: "imageLoadCompleted")
+    }
+}

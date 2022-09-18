@@ -11,7 +11,7 @@ final class WeatherDetailViewModel {
 	private let networkManager = WeatherNetwork.shared
 	private let imageCacheManager = ImageProvider.shared
 	
-	weak var mainViewControllerDelegate: MainViewController? = nil
+	public weak var mainViewControllerDelegate: MainViewController? = nil
 	
 	lazy var weatherInfoList = [WeatherInfoList]()
 	lazy var weatherIconList = [UIImage]()

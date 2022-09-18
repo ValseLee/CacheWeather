@@ -9,13 +9,14 @@ import UIKit
 
 final class MainViewController: UIViewController {
 	private let weatherTableView = UITableView(frame: .zero)
-	private var viewModel: WeatherDetailViewModel?
-	private var activeIndicator = UIActivityIndicatorView(style: .large)
+	private weak var viewModel: WeatherDetailViewModel?
+    private var activeIndicator = UIActivityIndicatorView(style: .large)
 	
 	// MARK: LifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		view.backgroundColor = .white
+        view.backgroundColor = .white
+        setNotificationCenter()
 		configUI()
 	}
 	
@@ -31,13 +32,16 @@ final class MainViewController: UIViewController {
 	
 	// MARK: Configs
 	private func configUI() {
-		configNavBarUI(withTitle: "One Weather", prefersLargerTitle: true, isHidden: false)
+		configNavBarUI(withTitle: "Cache Weather", prefersLargerTitle: true, isHidden: false)
 		configTableView()
 	}
 	
 	private func activateIndicator() {
 		weatherTableView.addSubview(activeIndicator)
+        self.view.isUserInteractionEnabled = false
 		activeIndicator.color = .systemPink.withAlphaComponent(0.4)
+        activeIndicator.backgroundColor = .clear.withAlphaComponent(0.075)
+        activeIndicator.setSize(height: view.frame.height, width: view.frame.width)
 		activeIndicator.setCenterX(inView: weatherTableView)
 		activeIndicator.setCenterY(inView: view)
 		activeIndicator.startAnimating()
@@ -45,26 +49,39 @@ final class MainViewController: UIViewController {
 	
 	private func configTableView() {
 		view.addSubview(weatherTableView)
-		activateIndicator()
-		weatherTableView.setAnchorTRBL(top: view.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 10, paddingRight: 0, paddingBottom: -10, paddingLeft: 0)
+		weatherTableView.setAnchorTRBL(
+            top: view.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, bottom: view.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor,
+            paddingTop: 10, paddingRight: 0, paddingBottom: -10, paddingLeft: 0)
+        activateIndicator()
 		weatherTableView.register(MainTableViewCell.self, forCellReuseIdentifier: "TABLE_CELL")
 		weatherTableView.isScrollEnabled = true
 		weatherTableView.dataSource = self
 		weatherTableView.delegate = self
 		weatherTableView.rowHeight = CGFloat(75)
 	}
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(loadComplete), name: .imageLoadCompleted, object: nil)
+    }
 	
 	// MARK: Networks
-	func updateUI() {
+	public func updateUI() {
 		DispatchQueue.main.async {
 			UIView.transition(with: self.weatherTableView,
 							  duration: 0.45,
 							  options: .transitionCrossDissolve) {
-				self.activeIndicator.removeFromSuperview()
 				self.weatherTableView.reloadData()
 			}
 		}
 	}
+    
+    // MARK: Selectors
+    @objc func loadComplete() -> Void {
+        DispatchQueue.main.async {
+            self.view.isUserInteractionEnabled = true
+            self.activeIndicator.removeFromSuperview()
+        }
+    }
 }
 
 extension MainViewController: UITableViewDataSource {

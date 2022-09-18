@@ -11,7 +11,7 @@ final class DetailViewController: UIViewController {
 	private let weatherDetailView = WeatherDetailView()
 	private var weatherInfoForEach: WeatherInfoForEach?
 	
-	private var viewModel: WeatherDetailViewModel?
+	private weak var viewModel: WeatherDetailViewModel?
 	private var cityName: String?
 	
 	// MARK: LifeCycle

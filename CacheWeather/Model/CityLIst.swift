@@ -92,7 +92,7 @@ struct CityList {
 		]
 	]
 	
-	func getCityId() -> String {
+	public func getCityId() -> String {
 		let cityIdList = cityList.compactMap { $0["id"] } as! [Int]
 		let cityIdString = cityIdList.map { String($0) }.joined(separator: ",")
 		return cityIdString
